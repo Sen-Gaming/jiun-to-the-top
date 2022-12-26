@@ -1,9 +1,16 @@
-require("utils.vec2")
+require("lib.vec2")
 
 function love.load()
     player = {}
     player.pos = Vec2(960, 540) -- Position
     player.speed = 3
+    player.sprite = love.graphics.newImage('assets/sprites/jiunsprite.png')
+
+    red = 62/255
+    green = 208/255
+    blue = 110/255
+    alpha = 50/100
+    backgroundColor = { red, green, blue, alpha}
 end
 
 function love.update(dt)
@@ -28,9 +35,9 @@ function love.update(dt)
 
     vel = vel:normed() * player.speed
     player.pos = player.pos + vel
-    
 end
 
 function love.draw()
-    love.graphics.circle("fill", player.pos.x, player.pos.y, 100)
+    love.graphics.draw(player.sprite, player.pos.x, player.pos.y)
+    love.graphics.setBackgroundColor(backgroundColor)
 end
