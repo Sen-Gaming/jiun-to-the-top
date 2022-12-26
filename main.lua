@@ -1,7 +1,8 @@
+require("lib.vec2")
+
 function love.load()
     player = {}
-    player.x = 960
-    player.y = 540
+    player.pos = Vec2(960, 540) -- Position
     player.speed = 3
     player.sprite = love.graphics.newImage('assets/sprites/jiunsprite.png')
 
@@ -13,25 +14,30 @@ function love.load()
 end
 
 function love.update(dt)
+    local vel = Vec2(0, 0)
+
     -- move up
     if love.keyboard.isDown("w") then
-        player.y = player.y - player.speed
+        vel.y = vel.y - 1
     end
     -- move down
     if love.keyboard.isDown("s") then
-        player.y = player.y + player.speed
+        vel.y = vel.y + 1
     end
     -- move left
     if love.keyboard.isDown("a") then
-        player.x = player.x - player.speed
+        vel.x = vel.x - 1
     end
     -- move right
     if love.keyboard.isDown("d") then
-        player.x = player.x + player.speed
+        vel.x = vel.x + 1
     end
+
+    vel = vel:normed() * player.speed
+    player.pos = player.pos + vel
 end
 
 function love.draw()
-    love.graphics.draw(player.sprite, player.x, player.y)
+    love.graphics.draw(player.sprite, player.pos.x, player.pos.y)
     love.graphics.setBackgroundColor(backgroundColor)
 end
