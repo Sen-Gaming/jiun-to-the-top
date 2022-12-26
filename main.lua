@@ -3,6 +3,13 @@ function love.load()
     player.x = 960
     player.y = 540
     player.speed = 3
+    player.sprite = love.graphics.newImage('assets/sprites/jiunsprite.png')
+
+    red = 62/255
+    green = 208/255
+    blue = 110/255
+    alpha = 50/100
+    backgroundColor = { red, green, blue, alpha}
 end
 
 function love.update(dt)
@@ -25,5 +32,6 @@ function love.update(dt)
 end
 
 function love.draw()
-    love.graphics.circle("fill", player.x, player.y, 100)
+    love.graphics.draw(player.sprite, player.x, player.y)
+    love.graphics.setBackgroundColor(backgroundColor)
 end
